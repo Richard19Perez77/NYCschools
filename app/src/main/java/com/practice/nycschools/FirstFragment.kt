@@ -13,16 +13,22 @@ import com.practice.nycschools.model.DataViewModel
 import com.practice.nycschools.model.NYCListClass
 import com.practice.nycschools.service.DataAdapter
 import com.practice.nycschools.service.RequestInterface
+import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
+import javax.inject.Inject
 
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
+@AndroidEntryPoint
 class FirstFragment : Fragment() {
+
+    @Inject
+    lateinit var retrofit: Retrofit
 
     private var _binding: FragmentFirstBinding? = null
 
@@ -54,7 +60,7 @@ class FirstFragment : Fragment() {
         // Observe the LiveData, passing in this activity as the LifecycleOwner and the observer.
         dataViewModel.currentData.observe(viewLifecycleOwner, nameObserver)
 
-        val retrofit: Retrofit = BaseActivity.retrofit
+
         val requestInterface: RequestInterface = retrofit.create(RequestInterface::class.java)
         val call: Call<List<NYCListClass>> = requestInterface.getNYCdata()
         call.enqueue(object : Callback<List<NYCListClass>> {
@@ -77,8 +83,7 @@ class FirstFragment : Fragment() {
     }
 
     fun startSecond(dbn: String) {
-        val action =
-            FirstFragmentDirections
+        val action = com.practice.nycschools.FirstFragmentDirections
                 .actionFirstFragmentToSecondFragment(dbn)
         findNavController().navigate(action)
     }

@@ -13,15 +13,21 @@ import com.practice.nycschools.model.DataViewModel
 import com.practice.nycschools.model.SchoolClass
 import com.practice.nycschools.model.util.Utils
 import com.practice.nycschools.service.RequestInterface
+import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
+import javax.inject.Inject
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
+@AndroidEntryPoint
 class SecondFragment : Fragment() {
+
+    @Inject
+    lateinit var retrofit: Retrofit
 
     private var _binding: FragmentSecondBinding? = null
 
@@ -32,7 +38,6 @@ class SecondFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val args: SecondFragmentArgs by navArgs()
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -72,7 +77,6 @@ class SecondFragment : Fragment() {
  //       dataViewModel.selectedData.observe(viewLifecycleOwner, selectedObserver)
 
         val dbn = args.selected
-        val retrofit: Retrofit = BaseActivity.retrofit
         val requestInterface: RequestInterface = retrofit.create(RequestInterface::class.java)
         val call: Call<List<SchoolClass>>? = dbn?.let { requestInterface.getSchoolData(it) }
         call?.enqueue(object : Callback<List<SchoolClass>> {

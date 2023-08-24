@@ -36,8 +36,8 @@ class ExampleInstrumentedTest {
     }
 
     @Test
-    fun testRecyclerViewShowing() {
-        onView(withId(R.id.recyclerViewId))
+    fun testProgressViewShowing() {
+        onView(withId(R.id.loadingProgressBar))
             .check(matches(isDisplayed()))
     }
 
