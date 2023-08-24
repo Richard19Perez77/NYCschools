@@ -5,8 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.navArgs
 import com.practice.nycschools.databinding.FragmentSecondBinding
 import com.practice.nycschools.model.DataViewModel
 import com.practice.nycschools.model.SchoolClass
@@ -24,11 +25,14 @@ class SecondFragment : Fragment() {
 
     private var _binding: FragmentSecondBinding? = null
 
-    private lateinit var dataViewModel: DataViewModel
+    private val dataViewModel: DataViewModel by viewModels()
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+
+    val args: SecondFragmentArgs by navArgs()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,9 +46,10 @@ class SecondFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        dataViewModel = ViewModelProvider(this)[DataViewModel::class.java]
 
         // Create the observer which updates the UI.
+        // val args: SecondFragmentArgs by navArgs()
+        // val receivedString = args.selectedData
 
         // Create the observer which updates the UI.
         val nameObserver: Observer<List<SchoolClass?>> =
@@ -57,16 +62,17 @@ class SecondFragment : Fragment() {
                 }
             }
 
+
+
         // Observe the LiveData, passing in this activity as the LifecycleOwner and the observer.
         dataViewModel.currentSchool.observe(viewLifecycleOwner, nameObserver)
+ //       dataViewModel.selectedData.observe(viewLifecycleOwner, selectedObserver)
 
-        // pass dbn from first fragment
-        var dbn = dataViewModel.selectedData
-
+        var dbn = args.selected
         var mainActivity: MainActivity = activity as MainActivity
         val retrofit: Retrofit = mainActivity.retrofit
         val requestInterface: RequestInterface = retrofit.create(RequestInterface::class.java)
-        val call: Call<List<SchoolClass>> = requestInterface.GetSchoolData(dbn.value)
+        val call: Call<List<SchoolClass>> = requestInterface.GetSchoolData(dbn)
         call.enqueue(object : Callback<List<SchoolClass>> {
             override fun onResponse(
                 call: Call<List<SchoolClass>>,

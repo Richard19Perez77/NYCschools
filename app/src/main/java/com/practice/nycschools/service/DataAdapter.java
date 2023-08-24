@@ -21,12 +21,10 @@ public class DataAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
     List<NYCListClass> dataList;
     FirstFragment first;
-    DataViewModel dataViewModel;
 
-    public DataAdapter(List<NYCListClass> data, FirstFragment fragment, DataViewModel viewModel) {
+    public DataAdapter(List<NYCListClass> data, FirstFragment fragment) {
         dataList = data;
         first = fragment;
-        dataViewModel = viewModel;
     }
 
     @NonNull
@@ -43,10 +41,8 @@ public class DataAdapter extends RecyclerView.Adapter<MyViewHolder> {
         holder.idTextview.setText(school);
         holder.idTextview.setOnClickListener(v -> {
 
-            dataViewModel.setSelectedData(dataList.get(position).getDbn());
+            first.startSecond(dataList.get(position).getDbn());
 
-            // add data to fragment
-            findNavController(first).navigate(R.id.action_FirstFragment_to_SecondFragment);
         });
     }
 

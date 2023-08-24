@@ -10,15 +10,6 @@ public class DataViewModel extends ViewModel {
     // Create a LiveData with a String
     private MutableLiveData<List<NYCListClass>> currentData;
 
-    private MutableLiveData<String> selectedData = new MutableLiveData<>();
-
-    public MutableLiveData<String> getSelectedData() {
-        if (selectedData == null) {
-            selectedData = new MutableLiveData<>();
-        }
-        return selectedData;
-    }
-
     public MutableLiveData<List<NYCListClass>> getCurrentData() {
         if (currentData == null) {
             currentData = new MutableLiveData<>();
@@ -33,9 +24,5 @@ public class DataViewModel extends ViewModel {
             currentSchool = new MutableLiveData<>();
         }
         return currentSchool;
-    }
-
-    public void setSelectedData(String dbn) {
-        selectedData.setValue(dbn);
     }
 }
