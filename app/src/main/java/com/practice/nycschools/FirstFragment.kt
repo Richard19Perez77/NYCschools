@@ -54,16 +54,17 @@ class FirstFragment : Fragment() {
 
         val retrofit: Retrofit = BaseActivity.retrofit
         val requestInterface: RequestInterface = retrofit.create(RequestInterface::class.java)
-        val call: Call<List<NYCListClass>> = requestInterface.GetNYCdata()
-        call.enqueue(object : Callback<List<NYCListClass>> {
+        val call: Call<List<NYCListClass?>?>? = requestInterface.getNYCdata()
+        call?.enqueue(object : Callback<List<NYCListClass?>?> {
+
             override fun onResponse(
-                call: Call<List<NYCListClass>>,
-                response: Response<List<NYCListClass>>
+                call: Call<List<NYCListClass?>?>,
+                response: Response<List<NYCListClass?>?>
             ) {
                 dataViewModel.currentData.value = response.body()
             }
 
-            override fun onFailure(call: Call<List<NYCListClass>>, t: Throwable) {}
+            override fun onFailure(call: Call<List<NYCListClass?>?>, t: Throwable) {}
         })
     }
 

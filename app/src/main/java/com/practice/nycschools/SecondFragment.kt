@@ -70,16 +70,17 @@ class SecondFragment : Fragment() {
         val dbn = args.selected
         val retrofit: Retrofit = BaseActivity.retrofit
         val requestInterface: RequestInterface = retrofit.create(RequestInterface::class.java)
-        val call: Call<List<SchoolClass>> = requestInterface.GetSchoolData(dbn)
-        call.enqueue(object : Callback<List<SchoolClass>> {
+        val call: Call<List<SchoolClass?>?>? = requestInterface.getSchoolData(dbn)
+        call?.enqueue(object : Callback<List<SchoolClass?>?> {
+
             override fun onResponse(
-                call: Call<List<SchoolClass>>,
-                response: Response<List<SchoolClass>>
+                call: Call<List<SchoolClass?>?>,
+                response: Response<List<SchoolClass?>?>
             ) {
                 if (response.isSuccessful) dataViewModel.currentSchool.value = response.body()
             }
 
-            override fun onFailure(call: Call<List<SchoolClass>>, t: Throwable) {}
+            override fun onFailure(call: Call<List<SchoolClass?>?>, t: Throwable) {}
         })
     }
 
