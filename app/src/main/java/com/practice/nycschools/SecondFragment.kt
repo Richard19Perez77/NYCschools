@@ -31,13 +31,13 @@ class SecondFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    val args: SecondFragmentArgs by navArgs()
+    private val args: SecondFragmentArgs by navArgs()
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         _binding = FragmentSecondBinding.inflate(inflater, container, false)
         return binding.root
@@ -67,9 +67,8 @@ class SecondFragment : Fragment() {
         dataViewModel.currentSchool.observe(viewLifecycleOwner, nameObserver)
  //       dataViewModel.selectedData.observe(viewLifecycleOwner, selectedObserver)
 
-        var dbn = args.selected
-        var mainActivity: MainActivity = activity as MainActivity
-        val retrofit: Retrofit = mainActivity.retrofit
+        val dbn = args.selected
+        val retrofit: Retrofit = BaseActivity.retrofit
         val requestInterface: RequestInterface = retrofit.create(RequestInterface::class.java)
         val call: Call<List<SchoolClass>> = requestInterface.GetSchoolData(dbn)
         call.enqueue(object : Callback<List<SchoolClass>> {

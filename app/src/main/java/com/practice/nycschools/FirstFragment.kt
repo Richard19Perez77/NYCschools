@@ -28,15 +28,12 @@ class FirstFragment : Fragment() {
 
     private val dataViewModel: DataViewModel by viewModels()
 
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         _binding = FragmentFirstBinding.inflate(inflater, container, false)
         return binding.root
@@ -55,8 +52,7 @@ class FirstFragment : Fragment() {
         // Observe the LiveData, passing in this activity as the LifecycleOwner and the observer.
         dataViewModel.currentData.observe(viewLifecycleOwner, nameObserver)
 
-        var mainActivity: MainActivity = activity as MainActivity
-        val retrofit: Retrofit = mainActivity.retrofit
+        val retrofit: Retrofit = BaseActivity.retrofit
         val requestInterface: RequestInterface = retrofit.create(RequestInterface::class.java)
         val call: Call<List<NYCListClass>> = requestInterface.GetNYCdata()
         call.enqueue(object : Callback<List<NYCListClass>> {
