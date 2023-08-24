@@ -55,7 +55,7 @@ class SecondFragment : Fragment() {
         val nameObserver: Observer<List<SchoolClass?>> =
             Observer { data: List<SchoolClass?>? ->
                 if (!data.isNullOrEmpty()) {
-                    val detail: String = Utils.BuildSchoolString(data[0])
+                    val detail: String? = data[0]?.let { Utils.buildSchoolString(it) }
                     binding.detailTextViewId.text = detail
                     binding.schoolTitle.text = getText(R.string.school_test_details)
                 } else {
@@ -64,7 +64,7 @@ class SecondFragment : Fragment() {
             }
 
         // Observe the LiveData, passing in this activity as the LifecycleOwner and the observer.
-        dataViewModel.currentSchool.observe(viewLifecycleOwner, nameObserver)
+        dataViewModel.currentSchool?.observe(viewLifecycleOwner, nameObserver)
  //       dataViewModel.selectedData.observe(viewLifecycleOwner, selectedObserver)
 
         val dbn = args.selected
@@ -77,7 +77,7 @@ class SecondFragment : Fragment() {
                 call: Call<List<SchoolClass?>?>,
                 response: Response<List<SchoolClass?>?>
             ) {
-                if (response.isSuccessful) dataViewModel.currentSchool.value = response.body()
+                if (response.isSuccessful) dataViewModel.currentSchool?.value = response.body() as List<SchoolClass>?
             }
 
             override fun onFailure(call: Call<List<SchoolClass?>?>, t: Throwable) {}

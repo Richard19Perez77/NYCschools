@@ -50,7 +50,7 @@ class FirstFragment : Fragment() {
             }
 
         // Observe the LiveData, passing in this activity as the LifecycleOwner and the observer.
-        dataViewModel.currentData.observe(viewLifecycleOwner, nameObserver)
+        dataViewModel.currentData?.observe(viewLifecycleOwner, nameObserver)
 
         val retrofit: Retrofit = BaseActivity.retrofit
         val requestInterface: RequestInterface = retrofit.create(RequestInterface::class.java)
@@ -61,7 +61,7 @@ class FirstFragment : Fragment() {
                 call: Call<List<NYCListClass?>?>,
                 response: Response<List<NYCListClass?>?>
             ) {
-                dataViewModel.currentData.value = response.body()
+                dataViewModel.currentData?.value = response.body() as List<NYCListClass>?
             }
 
             override fun onFailure(call: Call<List<NYCListClass?>?>, t: Throwable) {}
