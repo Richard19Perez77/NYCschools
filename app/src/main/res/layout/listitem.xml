@@ -6,11 +6,11 @@
     android:orientation="horizontal">
 
     <TextView
-        android:theme="@style/Widget.MaterialComponents.TextView"
-        android:layout_margin="5dp"
-        android:padding="10dp"
-        android:background="@color/white"
         android:id="@+id/textId"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@drawable/ripple_effect"
+        android:padding="10dp"
+        android:theme="@style/Widget.MaterialComponents.TextView" />
 </LinearLayout>
