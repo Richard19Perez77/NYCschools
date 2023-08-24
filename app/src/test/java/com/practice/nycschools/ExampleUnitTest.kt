@@ -14,7 +14,7 @@ class ExampleUnitTest {
 
     @Test
     fun testStringBuilder() {
-        var school = SchoolClass().apply {
+        val school = SchoolClass().apply {
             schoolName = "name"
             numOfSatTestTakers = "100"
             satCriticalReadingAvgScore = "50"
@@ -22,10 +22,15 @@ class ExampleUnitTest {
             satWritingAvgScore = "75"
         }
 
-        var testBuilder = Utils.BuildSchoolString(school)
+        val testBuilder = Utils.buildSchoolString(school)
 
-        var expected =
-            "School: " + school.schoolName + "\r\n" + "#Test Takers " + school.numOfSatTestTakers + "\r\n" + "Avg SAT Reading: " + school.satCriticalReadingAvgScore + "\r\n" + "Avg SAT Math: " + school.satMathAvgScore + "\r\n" + "Avg SAT Writing: " + school.satWritingAvgScore
+        val expected = """
+               School: ${school.schoolName}
+               #Test Takers ${school.numOfSatTestTakers}
+               Avg SAT Reading: ${school.satCriticalReadingAvgScore}
+               Avg SAT Math: ${school.satMathAvgScore}
+               Avg SAT Writing: ${school.satWritingAvgScore}
+               """.trimIndent()
 
         assertEquals(expected, testBuilder)
     }

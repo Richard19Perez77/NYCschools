@@ -5,21 +5,9 @@ import androidx.lifecycle.ViewModel
 
 class DataViewModel : ViewModel() {
 
-    var currentData: MutableLiveData<List<NYCListClass>>? = null
-        get() {
-            if (field == null) {
-                field = MutableLiveData()
-            }
-            return field
-        }
+    var currentData: MutableLiveData<List<NYCListClass>> = MutableLiveData()
         private set
 
-    var currentSchool: MutableLiveData<List<SchoolClass>>? = null
-        get() {
-            if (field == null) {
-                field = MutableLiveData()
-            }
-            return field
-        }
+    var currentSchool: MutableLiveData<List<SchoolClass>> = MutableLiveData()
         private set
 }

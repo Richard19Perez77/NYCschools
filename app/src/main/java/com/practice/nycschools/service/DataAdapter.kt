@@ -21,7 +21,7 @@ class DataAdapter(private var dataList: List<NYCListClass?>?, private var first:
         val school = dataList?.get(position)?.schoolName
         holder.idTextview.text = school
         holder.idTextview.setOnClickListener { dataList?.get(position)?.let { it1 ->
-            it1.dbn?.let { it2 ->
+            it1.dbn.let { it2 ->
                 first.startSecond(
                     it2
                 )

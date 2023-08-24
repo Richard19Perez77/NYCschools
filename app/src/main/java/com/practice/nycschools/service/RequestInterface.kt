@@ -8,8 +8,8 @@ import retrofit2.http.Query
 
 interface RequestInterface {
     @GET("resource/s3k6-pzi2.json/")
-    fun getNYCdata(): Call<List<NYCListClass?>?>?
+    fun getNYCdata(): Call<List<NYCListClass>>
 
     @GET("resource/f9bf-2cp4.json")
-    fun getSchoolData(@Query("dbn") dbn: String?): Call<List<SchoolClass?>?>?
+    fun getSchoolData(@Query("dbn") dbn: String): Call<List<SchoolClass>>
 }

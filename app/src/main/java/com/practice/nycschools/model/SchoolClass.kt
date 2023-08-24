@@ -8,30 +8,30 @@ import javax.annotation.Generated
 class SchoolClass {
     @SerializedName("dbn")
     @Expose
-    var dbn: String? = null
+    var dbn: String = ""
 
     @JvmField
     @SerializedName("school_name")
     @Expose
-    var schoolName: String? = null
+    var schoolName: String = ""
 
     @JvmField
     @SerializedName("num_of_sat_test_takers")
     @Expose
-    var numOfSatTestTakers: String? = null
+    var numOfSatTestTakers: String = ""
 
     @JvmField
     @SerializedName("sat_critical_reading_avg_score")
     @Expose
-    var satCriticalReadingAvgScore: String? = null
+    var satCriticalReadingAvgScore: String = ""
 
     @JvmField
     @SerializedName("sat_math_avg_score")
     @Expose
-    var satMathAvgScore: String? = null
+    var satMathAvgScore: String = ""
 
     @JvmField
     @SerializedName("sat_writing_avg_score")
     @Expose
-    var satWritingAvgScore: String? = null
+    var satWritingAvgScore: String = ""
 }
