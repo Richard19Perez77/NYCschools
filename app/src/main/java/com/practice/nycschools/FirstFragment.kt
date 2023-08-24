@@ -44,9 +44,11 @@ class FirstFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Create the observer which updates the UI.
-        val nameObserver: Observer<List<NYCListClass?>> =
-            Observer { data: List<NYCListClass?>? ->
+        val nameObserver: Observer<List<NYCListClass>> =
+            Observer { data: List<NYCListClass> ->
+                binding.loadingProgressBar.visibility = View.GONE
                 binding.recyclerViewId.adapter = DataAdapter(data, this)
+                binding.recyclerViewId.visibility = View.VISIBLE
             }
 
         // Observe the LiveData, passing in this activity as the LifecycleOwner and the observer.

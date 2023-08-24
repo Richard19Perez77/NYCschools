@@ -54,12 +54,16 @@ class SecondFragment : Fragment() {
         // Create the observer which updates the UI.
         val nameObserver: Observer<List<SchoolClass?>> =
             Observer { data: List<SchoolClass?>? ->
+                binding.loadingProgressBar.visibility = View.GONE
                 if (!data.isNullOrEmpty()) {
                     val detail: String? = data[0]?.let { Utils.buildSchoolString(it) }
                     binding.detailTextViewId.text = detail
                     binding.schoolTitle.text = getText(R.string.school_test_details)
+                    binding.schoolTitle.visibility = View.VISIBLE
+                    binding.detailTextViewId.visibility = View.VISIBLE
                 } else {
                     binding.detailTextViewId.setText(R.string.no_data_retrieved)
+                    binding.detailTextViewId.visibility = View.VISIBLE
                 }
             }
 
