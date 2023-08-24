@@ -57,12 +57,11 @@ class SecondFragment : Fragment() {
                 if (!data.isNullOrEmpty()) {
                     val detail: String = Utils.BuildSchoolString(data[0])
                     binding.detailTextViewId.text = detail
+                    binding.schoolTitle.text = getText(R.string.school_test_details)
                 } else {
                     binding.detailTextViewId.setText(R.string.no_data_retrieved)
                 }
             }
-
-
 
         // Observe the LiveData, passing in this activity as the LifecycleOwner and the observer.
         dataViewModel.currentSchool.observe(viewLifecycleOwner, nameObserver)
