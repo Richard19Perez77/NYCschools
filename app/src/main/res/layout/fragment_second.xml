@@ -30,7 +30,8 @@
         android:layout_height="wrap_content"
         android:layout_above="@id/detailTextViewId"
         android:layout_centerHorizontal="true"
-        android:textSize="20sp"
+        android:textSize="25sp"
+        android:textStyle="bold"
         android:theme="@style/Widget.MaterialComponents.TextView"
         android:visibility="invisible" />
 
